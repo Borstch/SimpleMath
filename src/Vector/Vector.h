@@ -18,13 +18,17 @@ namespace Vector
 	class Vector2D
 	{
 	public:
-		float magnitude, alpha, betha;
+		float m_Magnitude, m_Alpha, m_Betha;
 
 		Vector2D(float x, float y);
 		~Vector2D();
-		Coords2D GetCoords();
+		Vector2D add(const Vector2D& v);
+		Vector2D sub(const Vector2D& v);
+		Coords2D GetCoords() const;
+		float dot(const Vector2D& v);
 		void SetCoords(float new_x, float new_y);
 		void normalize();
+		void scale(float scaler);
 	private:
 		float x, y;
 
@@ -34,23 +38,23 @@ namespace Vector
 	class Vector3D
 	{
 	public:
-		float magnitude, alpha, betha, gama;
+		float m_Magnitude, m_Alpha, m_Betha, m_Gama;
 
 		Vector3D(float x, float y, float z);
 		~Vector3D();
-		Coords3D GetCoords();
+		Vector3D add(const Vector3D& v);
+		Vector3D sub(const Vector3D& v);
+		Vector3D cross(const Vector3D& v);
+		Coords3D GetCoords() const;
+		float dot(const Vector3D& v);
 		void SetCoords(float new_x, float new_y, float new_z);
 		void normalize();
+		void scale(float scaler);
 	private:
 		float x, y, z;
 
 		void ComputeParams();
 	};
-
-	Vector2D sum(Vector2D& vector1, Vector2D& vector2);
-	Vector2D dot_product(Vector2D& v1, Vector2D& v2);
-	float s_product(Vector2D& v1, Vector2D& v2);
-	Vector3D sum(Vector3D& v1, Vector3D& v2);
-	Vector3D dot_product(Vector3D& v1, Vector3D& v2);
-	float s_product(Vector3D& v1, Vector3D& v2);
+	Vector2D operator -(const Vector2D& vector);
+	Vector3D operator -(const Vector3D& vector);
 }
