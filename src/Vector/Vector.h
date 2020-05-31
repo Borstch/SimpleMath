@@ -56,5 +56,14 @@ namespace Vector
 		void ComputeParams();
 	};
 	Vector2D operator -(const Vector2D& vector);
+	Vector2D operator +(const Vector2D& v1, const Vector2D& v2);
+	Vector2D operator -(const Vector2D& v1, const Vector2D& v2);
+	Vector2D operator *(float scaler, const Vector2D& vector);
 	Vector3D operator -(const Vector3D& vector);
+	Vector3D operator +(const Vector3D& v1, const Vector3D& v2);
+	Vector3D operator -(const Vector3D& v1, const Vector3D& v2);
+	Vector3D operator *(float scaler, const Vector3D& vector);
+	Vector3D cross(const Vector3D& v1, const Vector3D& v2);
+	float operator *(const Vector2D& v1, const Vector2D& v2);
+	float operator *(const Vector3D& v1, const Vector3D& v2);
 }

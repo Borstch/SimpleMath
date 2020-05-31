@@ -156,8 +156,72 @@ Vector2D Vector::operator-(const Vector2D& vector)
 	return Vector2D(-coords.x, -coords.y);
 }
 
+Vector2D Vector::operator+(const Vector2D& v1, const Vector2D& v2)
+{
+	Coords2D c1 = v1.GetCoords();
+	Coords2D c2 = v2.GetCoords();
+	return Vector2D(c1.x + c2.x, c1.y + c2.y);
+}
+
+Vector2D Vector::operator -(const Vector2D& v1, const Vector2D& v2)
+{
+	Coords2D c1 = v1.GetCoords();
+	Coords2D c2 = v2.GetCoords();
+	return Vector2D(c1.x - c2.x, c1.y - c2.y);
+}
+
+Vector2D Vector::operator *(float scaler, const Vector2D& vector)
+{
+	Coords2D coords = vector.GetCoords();
+	return Vector2D(scaler * coords.x, scaler * coords.y);
+}
+
 Vector3D Vector::operator-(const Vector3D& vector)
 {
 	Coords3D coords = vector.GetCoords();
 	return Vector3D(-coords.x, -coords.y, -coords.z);
+}
+
+Vector3D Vector::operator +(const Vector3D& v1, const Vector3D& v2)
+{
+	Coords3D c1 = v1.GetCoords();
+	Coords3D c2 = v2.GetCoords();
+	return Vector3D(c1.x + c2.x, c1.y + c2.y, c1.z + c2.z);
+}
+
+Vector3D Vector::operator -(const Vector3D& v1, const Vector3D& v2)
+{
+	Coords3D c1 = v1.GetCoords();
+	Coords3D c2 = v2.GetCoords();
+	return Vector3D(c1.x - c2.x, c1.y - c2.y, c1.z - c2.z);
+}
+
+Vector3D Vector::operator *(float scaler, const Vector3D& vector)
+{
+	Coords3D coords = vector.GetCoords();
+	return Vector3D(scaler * coords.x, scaler * coords.y, scaler * coords.z);
+}
+
+Vector3D Vector::cross(const Vector3D& v1, const Vector3D& v2)
+{
+	Coords3D c1 = v1.GetCoords();
+	Coords3D c2 = v2.GetCoords();
+	float x = c1.y * c2.z - c1.z * c2.y;
+	float y = c1.z * c2.x - c1.x * c2.z;
+	float z = c1.x * c2.y - c2.x * c1.y;
+	return Vector3D(x, y, z);
+}
+
+float Vector::operator *(const Vector2D& v1, const Vector2D& v2)
+{
+	Coords2D c1 = v1.GetCoords();
+	Coords2D c2 = v2.GetCoords();
+	return c1.x * c2.x + c1.y * c2.y;
+}
+
+float Vector::operator *(const Vector3D& v1, const Vector3D& v2)
+{
+	Coords3D c1 = v1.GetCoords();
+	Coords3D c2 = v2.GetCoords();
+	return c1.x * c2.x + c1.y * c2.y + c1.z * c2.z;
 }
