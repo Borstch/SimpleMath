@@ -20,7 +20,10 @@ namespace Vector
 	public:
 		float m_Magnitude, m_Alpha, m_Betha;
 
+		Vector2D();
+		Vector2D(const Vector2D& other);
 		Vector2D(float x, float y);
+		Vector2D(float all);
 		~Vector2D();
 		Vector2D add(const Vector2D& v);
 		Vector2D sub(const Vector2D& v);
@@ -40,7 +43,10 @@ namespace Vector
 	public:
 		float m_Magnitude, m_Alpha, m_Betha, m_Gama;
 
+		Vector3D();
+		Vector3D(const Vector3D& other);
 		Vector3D(float x, float y, float z);
+		Vector3D(float all);
 		~Vector3D();
 		Vector3D add(const Vector3D& v);
 		Vector3D sub(const Vector3D& v);
@@ -66,4 +72,6 @@ namespace Vector
 	Vector3D cross(const Vector3D& v1, const Vector3D& v2);
 	float operator *(const Vector2D& v1, const Vector2D& v2);
 	float operator *(const Vector3D& v1, const Vector3D& v2);
+	bool operator ==(const Vector2D& v1, const Vector2D& v2);
+	bool operator ==(const Vector3D& v1, const Vector3D& v2);
 }

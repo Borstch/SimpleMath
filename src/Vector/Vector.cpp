@@ -6,9 +6,31 @@
 
 using namespace Vector;
 
+Vector2D::Vector2D()
+	: x(0), y(0)
+{
+	std::cout << "Created 0 0!\n";
+	ComputeParams();
+}
+
+Vector2D::Vector2D(const Vector2D& other)
+	: x(other.x), y(other.y), m_Magnitude(other.m_Magnitude),
+	m_Alpha(other.m_Alpha), m_Betha(other.m_Betha)
+{
+	std::cout << "Copied " << x << " " << y << "!\n";
+}
+
 Vector2D::Vector2D(float x, float y)
 	: x(x), y(y)
 {
+	std::cout << "Created " << x << " " << y << "!\n";
+	ComputeParams();
+}
+
+Vector2D::Vector2D(float all)
+	: x(all), y(all)
+{
+	std::cout << "Created " << x << " " << y << "!\n";
 	ComputeParams();
 }
 
@@ -22,7 +44,7 @@ Vector2D Vector2D::add(const Vector2D& v)
 	Coords2D coords = v.GetCoords();
 	x += coords.x;
 	y += coords.y;
-	return *this;
+	return *this; // modifies current vector
 }
 
 Vector2D Vector2D::sub(const Vector2D& v)
@@ -53,15 +75,24 @@ void Vector2D::SetCoords(float new_x, float new_y)
 
 void Vector2D::ComputeParams()
 {
-	m_Magnitude = sqrt(x * x + y * y);
-	m_Alpha = x / m_Magnitude;
-	m_Betha = y / m_Magnitude;
+	if ((x == 0) && (y == 0))
+	{
+		m_Magnitude = 0;
+		m_Alpha = 0;
+		m_Betha = 0;
+	}
+	else
+	{
+		m_Magnitude = sqrt(x * x + y * y);
+		m_Alpha = x / m_Magnitude;
+		m_Betha = y / m_Magnitude;
+	}
 }
 
 void Vector2D::normalize()
 {
-	this->SetCoords(x / m_Magnitude, y / m_Magnitude);
-	this->ComputeParams();
+	SetCoords(x / m_Magnitude, y / m_Magnitude);
+	ComputeParams();
 }
 
 void Vector2D::scale(float scaler)
@@ -70,9 +101,31 @@ void Vector2D::scale(float scaler)
 	y *= scaler;
 }
 
+Vector3D::Vector3D()
+	: x(0), y(0), z(0)
+{
+	std::cout << "Created 0 0 0 !\n";
+	ComputeParams();
+}
+
+Vector3D::Vector3D(const Vector3D& other)
+	: x(other.x), y(other.y), z(other.z), m_Magnitude(other.m_Magnitude),
+	m_Alpha(other.m_Alpha), m_Betha(other.m_Betha), m_Gama(other.m_Gama)
+{
+	std::cout << "Copied " << x << " " << y << " " << z << "!\n";
+}
+
 Vector3D::Vector3D(float x, float y, float z)
 	: x(x), y(y), z(z)
 {
+	std::cout << "Created " << x << " " << y << " " << z << "!\n";
+	ComputeParams();
+}
+
+Vector3D::Vector3D(float all)
+	: x(all), y(all), z(all)
+{
+	std::cout << "Created " << x << " " << y << " " << z << "!\n";
 	ComputeParams();
 }
 
@@ -102,7 +155,7 @@ Vector3D Vector3D::sub(const Vector3D& v)
 Vector3D Vector3D::cross(const Vector3D& v)
 {
 	Coords3D coords = v.GetCoords();
-	float new_x = y * coords.z - z * coords.y;
+	float new_x = y * coords.z - z * coords.y; // formula for cross product
 	float new_y = z * coords.x - x * coords.z;
 	float new_z = x * coords.y - coords.x * y;
 	x = new_x;
@@ -131,8 +184,8 @@ void Vector3D::SetCoords(float new_x, float new_y, float new_z)
 
 void Vector::Vector3D::normalize()
 {
-	this->SetCoords(x / m_Magnitude, y / m_Magnitude, z / m_Magnitude);
-	this->ComputeParams();
+	SetCoords(x / m_Magnitude, y / m_Magnitude, z / m_Magnitude);
+	ComputeParams();
 }
 
 void Vector3D::scale(float scaler)
@@ -144,10 +197,20 @@ void Vector3D::scale(float scaler)
 
 void Vector3D::ComputeParams()
 {
-	m_Magnitude = sqrt(x * x + y * y + z * z);
-	m_Alpha = x / m_Magnitude;
-	m_Betha = y / m_Magnitude;
-	m_Gama = z / m_Magnitude;
+	if ((x == 0) && (y == 0) & (z == 0))
+	{
+		m_Magnitude = 0;
+		m_Alpha = 0;
+		m_Betha = 0;
+		m_Gama = 0;
+	}
+	else
+	{
+		m_Magnitude = sqrt(x * x + y * y + z * z);
+		m_Alpha = x / m_Magnitude;
+		m_Betha = y / m_Magnitude;
+		m_Gama = z / m_Magnitude;
+	}
 }
 
 Vector2D Vector::operator-(const Vector2D& vector)
@@ -224,4 +287,18 @@ float Vector::operator *(const Vector3D& v1, const Vector3D& v2)
 	Coords3D c1 = v1.GetCoords();
 	Coords3D c2 = v2.GetCoords();
 	return c1.x * c2.x + c1.y * c2.y + c1.z * c2.z;
+}
+
+bool Vector::operator ==(const Vector2D& v1, const Vector2D& v2)
+{
+	Coords2D c1 = v1.GetCoords();
+	Coords2D c2 = v2.GetCoords();
+	return (c1.x == c2.x) && (c1.y == c2.y);
+}
+
+bool Vector::operator ==(const Vector3D& v1, const Vector3D& v2)
+{
+	Coords3D c1 = v1.GetCoords();
+	Coords3D c2 = v2.GetCoords();
+	return (c1.x == c2.x) && (c1.y == c2.y) && (c1.z == c2.z);
 }
