@@ -28,7 +28,13 @@ namespace Vector
 		Vector2D add(const Vector2D& v);
 		Vector2D sub(const Vector2D& v);
 		Coords2D GetCoords() const;
+		float GetX() const;
+		float GetY() const;
 		float dot(const Vector2D& v);
+		float on_X();
+		float on_Y();
+		bool is_point() const;
+		bool is_collinear_with(const Vector2D& vector) const;
 		void SetCoords(float new_x, float new_y);
 		void normalize();
 		void scale(float scaler);
@@ -37,6 +43,12 @@ namespace Vector
 
 		void ComputeParams();
 	};
+
+	Vector2D add(const Vector2D& v1, const Vector2D& v2);
+	Vector2D sub(const Vector2D& v1, const Vector2D& v2);
+	float dot(const Vector2D& v1, const Vector2D& v2);
+	float angle_between(const Vector2D& v1, const Vector2D& v2);
+	bool is_collinear(const Vector2D& v1, const Vector2D& v2);
 
 	class Vector3D
 	{
@@ -52,7 +64,15 @@ namespace Vector
 		Vector3D sub(const Vector3D& v);
 		Vector3D cross(const Vector3D& v);
 		Coords3D GetCoords() const;
+		float GetX() const;
+		float GetY() const;
+		float GetZ() const;
 		float dot(const Vector3D& v);
+		float on_X();
+		float on_Y();
+		float on_Z();
+		bool is_point() const;
+		bool is_collinear_with(const Vector3D& vector) const;
 		void SetCoords(float new_x, float new_y, float new_z);
 		void normalize();
 		void scale(float scaler);
@@ -61,6 +81,13 @@ namespace Vector
 
 		void ComputeParams();
 	};
+	Vector3D cross(const Vector3D& v1, const Vector3D& v2);
+	Vector3D add(const Vector3D& v1, const Vector3D& v2);
+	Vector3D sub(const Vector3D& v1, const Vector3D& v2);
+	float dot(const Vector3D& v1, const Vector3D& v2);
+	float angle_between(const Vector3D& v1, const Vector3D& v2);
+	bool is_collinear(const Vector3D& v1, const Vector3D& v2);
+
 	Vector2D operator -(const Vector2D& vector);
 	Vector2D operator +(const Vector2D& v1, const Vector2D& v2);
 	Vector2D operator -(const Vector2D& v1, const Vector2D& v2);
@@ -69,7 +96,6 @@ namespace Vector
 	Vector3D operator +(const Vector3D& v1, const Vector3D& v2);
 	Vector3D operator -(const Vector3D& v1, const Vector3D& v2);
 	Vector3D operator *(float scaler, const Vector3D& vector);
-	Vector3D cross(const Vector3D& v1, const Vector3D& v2);
 	float operator *(const Vector2D& v1, const Vector2D& v2);
 	float operator *(const Vector3D& v1, const Vector3D& v2);
 	bool operator ==(const Vector2D& v1, const Vector2D& v2);

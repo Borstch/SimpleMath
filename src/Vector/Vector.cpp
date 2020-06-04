@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <cassert>
 
 #include "Vector.h"
 
@@ -60,10 +61,42 @@ Coords2D Vector2D::GetCoords() const
 	return { x, y };
 }
 
+float Vector2D::GetX() const
+{
+	return x;
+}
+
+float Vector2D::GetY() const
+{
+	return y;
+}
+
 float Vector2D::dot(const Vector2D& v)
 {
 	Coords2D coords = v.GetCoords();
 	return x * coords.x + y * coords.y;
+}
+
+float Vector2D::on_X()
+{
+	return m_Magnitude * m_Alpha;
+}
+
+float Vector2D::on_Y()
+{
+	return m_Magnitude * m_Betha;
+}
+
+bool Vector2D::is_point() const
+{
+	return m_Magnitude;
+}
+
+bool Vector2D::is_collinear_with(const Vector2D& vector) const
+{
+	if (this->is_point() || vector.is_point())
+		return true;
+	return (x / vector.x) == (y / vector.y);
 }
 
 void Vector2D::SetCoords(float new_x, float new_y)
@@ -99,6 +132,42 @@ void Vector2D::scale(float scaler)
 {
 	x *= scaler;
 	y *= scaler;
+}
+
+Vector2D Vector::add(const Vector2D& v1, const Vector2D& v2)
+{
+	Coords2D c1 = v1.GetCoords();
+	Coords2D c2 = v2.GetCoords();
+	return Vector2D(c1.x + c2.x, c1.y + c2.y);
+}
+
+Vector2D Vector::sub(const Vector2D& v1, const Vector2D& v2)
+{
+	Coords2D c1 = v1.GetCoords();
+	Coords2D c2 = v2.GetCoords();
+	return Vector2D(c1.x - c2.x, c1.y - c2.y);
+}
+
+float Vector::dot(const Vector2D& v1, const Vector2D& v2)
+{
+	Coords2D c1 = v1.GetCoords();
+	Coords2D c2 = v2.GetCoords();
+	return c1.x * c2.x + c1.y * c2.y;
+}
+
+float Vector::angle_between(const Vector2D& v1, const Vector2D& v2)
+{
+	assert(!v1.is_point() && !v2.is_point()); // Angle between dots is ambiguous
+	return acos(dot(v1, v2) / (v1.m_Magnitude * v2.m_Magnitude));
+}
+
+bool Vector::is_collinear(const Vector2D& v1, const Vector2D& v2)
+{
+	if (v1.is_point() || v2.is_point())
+		return true;
+	Coords2D c1 = v1.GetCoords();
+	Coords2D c2 = v2.GetCoords();
+	return (c1.x / c2.x) == (c1.y / c2.y);
 }
 
 Vector3D::Vector3D()
@@ -169,10 +238,50 @@ Coords3D Vector3D::GetCoords() const
 	return { x, y, z };
 }
 
+float Vector3D::GetX() const
+{
+	return x;
+}
+
+float Vector3D::GetY() const
+{
+	return y;
+}
+
+float Vector3D::GetZ() const
+{
+	return z;
+}
+
 float Vector3D::dot(const Vector3D& v)
 {
 	Coords3D coords = v.GetCoords();
 	return x * coords.x + y * coords.y + z * coords.z;
+}
+
+float Vector3D::on_X()
+{
+	return m_Magnitude * m_Alpha;
+}
+
+float Vector3D::on_Y()
+{
+	return m_Magnitude * m_Betha;
+}
+
+float Vector3D::on_Z()
+{
+	return m_Magnitude * m_Gama;
+}
+
+bool Vector3D::is_point() const
+{
+	return m_Magnitude;
+}
+
+bool Vector3D::is_collinear_with(const Vector3D& vector) const
+{
+	return Vector::cross(*this, vector) == 0;
 }
 
 void Vector3D::SetCoords(float new_x, float new_y, float new_z)
@@ -211,6 +320,48 @@ void Vector3D::ComputeParams()
 		m_Betha = y / m_Magnitude;
 		m_Gama = z / m_Magnitude;
 	}
+}
+
+Vector3D Vector::cross(const Vector3D& v1, const Vector3D& v2)
+{
+	Coords3D c1 = v1.GetCoords();
+	Coords3D c2 = v2.GetCoords();
+	float x = c1.y * c2.z - c1.z * c2.y;
+	float y = c1.z * c2.x - c1.x * c2.z;
+	float z = c1.x * c2.y - c2.x * c1.y;
+	return Vector3D(x, y, z);
+}
+
+Vector3D Vector::add(const Vector3D& v1, const Vector3D& v2)
+{
+	Coords3D c1 = v1.GetCoords();
+	Coords3D c2 = v2.GetCoords();
+	return Vector3D(c1.x + c2.x, c1.y + c2.y, c1.z + c2.z);
+}
+
+Vector3D Vector::sub(const Vector3D& v1, const Vector3D& v2)
+{
+	Coords3D c1 = v1.GetCoords();
+	Coords3D c2 = v2.GetCoords();
+	return Vector3D(c1.x - c2.x, c1.y - c2.y, c1.z - c2.z);
+}
+
+float Vector::dot(const Vector3D& v1, const Vector3D& v2)
+{
+	Coords3D c1 = v1.GetCoords();
+	Coords3D c2 = v2.GetCoords();
+	return c1.x * c2.x + c1.y * c2.y + c1.z * c2.z;
+}
+
+float Vector::angle_between(const Vector3D& v1, const Vector3D& v2)
+{
+	assert(!v1.is_point() && !v2.is_point()); // Angle between dots is ambiguous
+	return acos(dot(v1, v2) / (v1.m_Magnitude * v2.m_Magnitude));
+}
+
+bool Vector::is_collinear(const Vector3D& v1, const Vector3D& v2)
+{
+	return Vector::cross(v1, v2) == 0;
 }
 
 Vector2D Vector::operator-(const Vector2D& vector)
@@ -263,16 +414,6 @@ Vector3D Vector::operator *(float scaler, const Vector3D& vector)
 {
 	Coords3D coords = vector.GetCoords();
 	return Vector3D(scaler * coords.x, scaler * coords.y, scaler * coords.z);
-}
-
-Vector3D Vector::cross(const Vector3D& v1, const Vector3D& v2)
-{
-	Coords3D c1 = v1.GetCoords();
-	Coords3D c2 = v2.GetCoords();
-	float x = c1.y * c2.z - c1.z * c2.y;
-	float y = c1.z * c2.x - c1.x * c2.z;
-	float z = c1.x * c2.y - c2.x * c1.y;
-	return Vector3D(x, y, z);
 }
 
 float Vector::operator *(const Vector2D& v1, const Vector2D& v2)
