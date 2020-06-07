@@ -1,6 +1,9 @@
 # Binaries
 bin
 
+# Tests
+**/Testing
+
 # Visual Studio files
 .vs/
 **.sln
