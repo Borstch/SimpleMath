@@ -31,17 +31,16 @@ namespace Vector
 		float GetX() const;
 		float GetY() const;
 		float dot(const Vector2D& v);
-		float on_X();
-		float on_Y();
 		bool is_point() const;
 		bool is_collinear_with(const Vector2D& vector) const;
 		void SetCoords(float new_x, float new_y);
 		void normalize();
 		void scale(float scaler);
+		void Print() const;
 	private:
 		float x, y;
 
-		void ComputeParams();
+		void ComputeParams(bool first = false);
 	};
 
 	Vector2D add(const Vector2D& v1, const Vector2D& v2);
@@ -68,18 +67,16 @@ namespace Vector
 		float GetY() const;
 		float GetZ() const;
 		float dot(const Vector3D& v);
-		float on_X();
-		float on_Y();
-		float on_Z();
 		bool is_point() const;
 		bool is_collinear_with(const Vector3D& vector) const;
 		void SetCoords(float new_x, float new_y, float new_z);
 		void normalize();
 		void scale(float scaler);
+		void Print() const;
 	private:
 		float x, y, z;
 
-		void ComputeParams();
+		void ComputeParams(bool first = false);
 	};
 	Vector3D cross(const Vector3D& v1, const Vector3D& v2);
 	Vector3D add(const Vector3D& v1, const Vector3D& v2);

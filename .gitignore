@@ -1,8 +1,6 @@
 # Binaries
 bin
-
-# Tests
-**/Testing
+bin-int
 
 # Visual Studio files
 .vs/

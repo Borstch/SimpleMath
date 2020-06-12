@@ -11,7 +11,7 @@ Vector2D::Vector2D()
 	: x(0), y(0)
 {
 	std::cout << "Created 0 0!\n";
-	ComputeParams();
+	ComputeParams(true);
 }
 
 Vector2D::Vector2D(const Vector2D& other)
@@ -25,14 +25,14 @@ Vector2D::Vector2D(float x, float y)
 	: x(x), y(y)
 {
 	std::cout << "Created " << x << " " << y << "!\n";
-	ComputeParams();
+	ComputeParams(true);
 }
 
 Vector2D::Vector2D(float all)
 	: x(all), y(all)
 {
 	std::cout << "Created " << x << " " << y << "!\n";
-	ComputeParams();
+	ComputeParams(true);
 }
 
 Vector2D::~Vector2D()
@@ -77,16 +77,6 @@ float Vector2D::dot(const Vector2D& v)
 	return x * coords.x + y * coords.y;
 }
 
-float Vector2D::on_X()
-{
-	return m_Magnitude * m_Alpha;
-}
-
-float Vector2D::on_Y()
-{
-	return m_Magnitude * m_Betha;
-}
-
 bool Vector2D::is_point() const
 {
 	return m_Magnitude;
@@ -106,8 +96,10 @@ void Vector2D::SetCoords(float new_x, float new_y)
 	ComputeParams();
 }
 
-void Vector2D::ComputeParams()
+void Vector2D::ComputeParams(bool first)
 {
+	if (!first)
+		std::cout << "Updated: " << x << " " << y << std::endl;
 	if ((x == 0) && (y == 0))
 	{
 		m_Magnitude = 0;
@@ -132,6 +124,12 @@ void Vector2D::scale(float scaler)
 {
 	x *= scaler;
 	y *= scaler;
+}
+
+void Vector2D::Print() const
+{
+	std::cout << "Coords: " << x << " " << y << "\nMagnitude: " << m_Magnitude <<
+		"\nCos Alpha: " << m_Alpha << " " << "Cos Betha: " << m_Betha << std::endl;
 }
 
 Vector2D Vector::add(const Vector2D& v1, const Vector2D& v2)
@@ -174,7 +172,7 @@ Vector3D::Vector3D()
 	: x(0), y(0), z(0)
 {
 	std::cout << "Created 0 0 0 !\n";
-	ComputeParams();
+	ComputeParams(true);
 }
 
 Vector3D::Vector3D(const Vector3D& other)
@@ -188,14 +186,14 @@ Vector3D::Vector3D(float x, float y, float z)
 	: x(x), y(y), z(z)
 {
 	std::cout << "Created " << x << " " << y << " " << z << "!\n";
-	ComputeParams();
+	ComputeParams(true);
 }
 
 Vector3D::Vector3D(float all)
 	: x(all), y(all), z(all)
 {
 	std::cout << "Created " << x << " " << y << " " << z << "!\n";
-	ComputeParams();
+	ComputeParams(true);
 }
 
 Vector3D::~Vector3D()
@@ -259,21 +257,6 @@ float Vector3D::dot(const Vector3D& v)
 	return x * coords.x + y * coords.y + z * coords.z;
 }
 
-float Vector3D::on_X()
-{
-	return m_Magnitude * m_Alpha;
-}
-
-float Vector3D::on_Y()
-{
-	return m_Magnitude * m_Betha;
-}
-
-float Vector3D::on_Z()
-{
-	return m_Magnitude * m_Gama;
-}
-
 bool Vector3D::is_point() const
 {
 	return m_Magnitude;
@@ -304,8 +287,10 @@ void Vector3D::scale(float scaler)
 	z *= scaler;
 }
 
-void Vector3D::ComputeParams()
+void Vector3D::ComputeParams(bool first)
 {
+	if (!first)
+		std::cout << "Updated: " << x << " " << y << " " << z << std::endl;
 	if ((x == 0) && (y == 0) & (z == 0))
 	{
 		m_Magnitude = 0;
@@ -320,6 +305,13 @@ void Vector3D::ComputeParams()
 		m_Betha = y / m_Magnitude;
 		m_Gama = z / m_Magnitude;
 	}
+}
+
+void Vector3D::Print() const
+{
+	std::cout << "Coords: " << x << " " << y << " " << z << "\nMagnitude: " <<
+		m_Magnitude << "\nCos Alpha: " << m_Alpha << " " << " Cos Betha: " <<
+		m_Betha << " Cos Gama: " << m_Gama << std::endl;
 }
 
 Vector3D Vector::cross(const Vector3D& v1, const Vector3D& v2)
