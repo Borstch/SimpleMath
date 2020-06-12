@@ -3,6 +3,5 @@
 
 int main()
 {
-	std::cout << "Simple Math project!\n";
-	Vector::Vector2D v(1, 2);
+	std::cout << "Hello, Simple Math!\n";
 }

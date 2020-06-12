@@ -25,8 +25,8 @@ namespace Vector
 		Vector2D(float x, float y);
 		Vector2D(float all);
 		~Vector2D();
-		Vector2D add(const Vector2D& v);
-		Vector2D sub(const Vector2D& v);
+		Vector2D* add(const Vector2D& v);
+		Vector2D* sub(const Vector2D& v);
 		Coords2D GetCoords() const;
 		float GetX() const;
 		float GetY() const;
@@ -46,7 +46,7 @@ namespace Vector
 	Vector2D add(const Vector2D& v1, const Vector2D& v2);
 	Vector2D sub(const Vector2D& v1, const Vector2D& v2);
 	float dot(const Vector2D& v1, const Vector2D& v2);
-	float angle_between(const Vector2D& v1, const Vector2D& v2);
+	float angle_between(const Vector2D& v1, const Vector2D& v2); // in radians
 	bool is_collinear(const Vector2D& v1, const Vector2D& v2);
 
 	class Vector3D
@@ -59,9 +59,9 @@ namespace Vector
 		Vector3D(float x, float y, float z);
 		Vector3D(float all);
 		~Vector3D();
-		Vector3D add(const Vector3D& v);
-		Vector3D sub(const Vector3D& v);
-		Vector3D cross(const Vector3D& v);
+		Vector3D* add(const Vector3D& v);
+		Vector3D* sub(const Vector3D& v);
+		Vector3D* cross(const Vector3D& v);
 		Coords3D GetCoords() const;
 		float GetX() const;
 		float GetY() const;

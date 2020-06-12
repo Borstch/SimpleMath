@@ -40,20 +40,20 @@ Vector2D::~Vector2D()
 	std::cout << "Destroyed: " << x << " " << y << std::endl;
 }
 
-Vector2D Vector2D::add(const Vector2D& v)
+Vector2D* Vector2D::add(const Vector2D& v)
 {
 	Coords2D coords = v.GetCoords();
 	x += coords.x;
 	y += coords.y;
-	return *this; // modifies current vector
+	return this; // modifies current vector
 }
 
-Vector2D Vector2D::sub(const Vector2D& v)
+Vector2D* Vector2D::sub(const Vector2D& v)
 {
 	Coords2D coords = v.GetCoords();
 	x -= coords.x;
 	y -= coords.y;
-	return *this;
+	return this;
 }
 
 Coords2D Vector2D::GetCoords() const
@@ -79,7 +79,7 @@ float Vector2D::dot(const Vector2D& v)
 
 bool Vector2D::is_point() const
 {
-	return m_Magnitude;
+	return !m_Magnitude;
 }
 
 bool Vector2D::is_collinear_with(const Vector2D& vector) const
@@ -201,25 +201,25 @@ Vector3D::~Vector3D()
 	std::cout << "Destroyed: " << x << " " << y << " " << z << std::endl;
 }
 
-Vector3D Vector3D::add(const Vector3D& v)
+Vector3D* Vector3D::add(const Vector3D& v)
 {
 	Coords3D coords = v.GetCoords();
 	x += coords.x;
 	y += coords.y;
 	z += coords.z;
-	return *this;
+	return this;
 }
 
-Vector3D Vector3D::sub(const Vector3D& v)
+Vector3D* Vector3D::sub(const Vector3D& v)
 {
 	Coords3D coords = v.GetCoords();
 	x -= coords.x;
 	y -= coords.y;
 	z -= coords.z;
-	return *this;
+	return this;
 }
 
-Vector3D Vector3D::cross(const Vector3D& v)
+Vector3D* Vector3D::cross(const Vector3D& v)
 {
 	Coords3D coords = v.GetCoords();
 	float new_x = y * coords.z - z * coords.y; // formula for cross product
@@ -228,7 +228,7 @@ Vector3D Vector3D::cross(const Vector3D& v)
 	x = new_x;
 	y = new_y;
 	z = new_z;
-	return *this;
+	return this;
 }
 
 Coords3D Vector3D::GetCoords() const
@@ -259,7 +259,7 @@ float Vector3D::dot(const Vector3D& v)
 
 bool Vector3D::is_point() const
 {
-	return m_Magnitude;
+	return !m_Magnitude; // if magnitude is not zero then vector isn't a point
 }
 
 bool Vector3D::is_collinear_with(const Vector3D& vector) const
@@ -272,6 +272,7 @@ void Vector3D::SetCoords(float new_x, float new_y, float new_z)
 	x = new_x;
 	y = new_y;
 	z = new_z;
+	ComputeParams();
 }
 
 void Vector::Vector3D::normalize()
@@ -353,7 +354,7 @@ float Vector::angle_between(const Vector3D& v1, const Vector3D& v2)
 
 bool Vector::is_collinear(const Vector3D& v1, const Vector3D& v2)
 {
-	return Vector::cross(v1, v2) == 0;
+	return cross(v1, v2) == 0;
 }
 
 Vector2D Vector::operator-(const Vector2D& vector)
