@@ -46,7 +46,7 @@ namespace Vector
 	Vector2D add(const Vector2D& v1, const Vector2D& v2);
 	Vector2D sub(const Vector2D& v1, const Vector2D& v2);
 	float dot(const Vector2D& v1, const Vector2D& v2);
-	float angle_between(const Vector2D& v1, const Vector2D& v2); // in radians
+	float angle_between(const Vector2D& v1, const Vector2D& v2, const char* mode = "rad");
 	bool is_collinear(const Vector2D& v1, const Vector2D& v2);
 
 	class Vector3D
@@ -82,7 +82,7 @@ namespace Vector
 	Vector3D add(const Vector3D& v1, const Vector3D& v2);
 	Vector3D sub(const Vector3D& v1, const Vector3D& v2);
 	float dot(const Vector3D& v1, const Vector3D& v2);
-	float angle_between(const Vector3D& v1, const Vector3D& v2);
+	float angle_between(const Vector3D& v1, const Vector3D& v2, const char* mode = "rad");
 	bool is_collinear(const Vector3D& v1, const Vector3D& v2);
 
 	Vector2D operator -(const Vector2D& vector);

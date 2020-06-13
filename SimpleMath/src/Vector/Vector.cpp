@@ -1,8 +1,4 @@
-#include <iostream>
-#include <string>
-#include <cmath>
-#include <cassert>
-
+#include "Simplepch.h"
 #include "Vector.h"
 
 using namespace Vector;
@@ -153,10 +149,13 @@ float Vector::dot(const Vector2D& v1, const Vector2D& v2)
 	return c1.x * c2.x + c1.y * c2.y;
 }
 
-float Vector::angle_between(const Vector2D& v1, const Vector2D& v2)
+float Vector::angle_between(const Vector2D& v1, const Vector2D& v2, const char* mode)
 {
 	assert(!v1.is_point() && !v2.is_point()); // Angle between dots is ambiguous
-	return acos(dot(v1, v2) / (v1.m_Magnitude * v2.m_Magnitude));
+	float angle =  acos(dot(v1, v2) / (v1.m_Magnitude * v2.m_Magnitude));
+	if (mode == "deg")
+		return angle / M_PI * 180;
+	return angle;
 }
 
 bool Vector::is_collinear(const Vector2D& v1, const Vector2D& v2)
@@ -346,10 +345,13 @@ float Vector::dot(const Vector3D& v1, const Vector3D& v2)
 	return c1.x * c2.x + c1.y * c2.y + c1.z * c2.z;
 }
 
-float Vector::angle_between(const Vector3D& v1, const Vector3D& v2)
+float Vector::angle_between(const Vector3D& v1, const Vector3D& v2, const char* mode)
 {
 	assert(!v1.is_point() && !v2.is_point()); // Angle between dots is ambiguous
-	return acos(dot(v1, v2) / (v1.m_Magnitude * v2.m_Magnitude));
+	float angle = acos(dot(v1, v2) / (v1.m_Magnitude * v2.m_Magnitude));
+	if (mode == "deg")
+		return angle / M_PI * 180;
+	return angle;
 }
 
 bool Vector::is_collinear(const Vector3D& v1, const Vector3D& v2)
