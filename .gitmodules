@@ -1,0 +1,3 @@
+[submodule "SimpleMath/vendor/spdlog"]
+	path = SimpleMath/vendor/spdlog
+	url = https://github.com/gabime/spdlog
