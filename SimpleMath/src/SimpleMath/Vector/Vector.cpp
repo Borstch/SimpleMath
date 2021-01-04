@@ -1,5 +1,5 @@
 #include "Simplepch.h"
-#include "Core/Log.h"
+#include "SimpleMath/Core/Log.h"
 #include "Vector.h"
 
 namespace SimpleMath
