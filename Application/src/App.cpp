@@ -1,7 +1,9 @@
 #include <iostream>
-#include <SMath.h>
+#include <SimpleMath.h>
 
 int main()
 {
-	std::cout << "Hello, Simple Math!\n";
+	SimpleMath::Log::Init();
+	SM_INFO("Application has been initialized");
+	SM_CORE_WARN("Some functionality may be broken");
 }
