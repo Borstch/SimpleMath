@@ -1,7 +1,7 @@
 #pragma once
 
 #include "SimpleMath.h"
-#include "spdlog/spdlog.h"
+#include <spdlog/spdlog.h>
 
 namespace SimpleMath
 {

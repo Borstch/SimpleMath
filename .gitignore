@@ -2,9 +2,6 @@
 bin
 bin-int
 
-#Application
-Application/src
-
 # Visual Studio files
 .vs/
 **.sln
