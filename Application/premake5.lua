@@ -1,7 +1,7 @@
 project "Application"
 	kind "ConsoleApp"
 	language "C++"
-	cppdialect "C++11"
+	cppdialect "C++17"
 	staticruntime "On"
 
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")

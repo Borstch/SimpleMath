@@ -120,6 +120,7 @@ namespace SimpleMath
 
 			void Vector2D::normalize()
 			{
+				SM_CORE_ASSERT(m_Magnitude != 0, "Point can't be normalized!");
 				setCoords(x / m_Magnitude, y / m_Magnitude);
 				computeParams();
 			}
@@ -279,6 +280,7 @@ namespace SimpleMath
 
 			void Vector::Vector3D::normalize()
 			{
+				SM_CORE_ASSERT(m_Magnitude != 0, "Point can't be normalized!");
 				setCoords(x / m_Magnitude, y / m_Magnitude, z / m_Magnitude);
 				computeParams();
 			}
