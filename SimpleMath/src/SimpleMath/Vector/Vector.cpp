@@ -47,6 +47,7 @@ namespace SimpleMath
 				Coords2D coords = v.getCoords();
 				x += coords.x;
 				y += coords.y;
+				computeParams();
 				return this; // modifies current vector
 			}
 
@@ -55,6 +56,7 @@ namespace SimpleMath
 				Coords2D coords = v.getCoords();
 				x -= coords.x;
 				y -= coords.y;
+				computeParams();
 				return this;
 			}
 
@@ -126,6 +128,7 @@ namespace SimpleMath
 			{
 				x *= scaler;
 				y *= scaler;
+				computeParams();
 			}
 
 			void Vector2D::print() const
@@ -153,15 +156,6 @@ namespace SimpleMath
 				Coords2D c1 = v1.getCoords();
 				Coords2D c2 = v2.getCoords();
 				return c1.x * c2.x + c1.y * c2.y;
-			}
-
-			float Vector::angle_between(const Vector2D& v1, const Vector2D& v2, const char* mode)
-			{
-				assert(!v1.is_point() && !v2.is_point()); // Angle between dots is ambiguous
-				float angle = acos(dot(v1, v2) / (v1.m_Magnitude * v2.m_Magnitude));
-				if (mode == "deg")
-					return angle / M_PI * 180;
-				return angle;
 			}
 
 			bool Vector::is_collinear(const Vector2D& v1, const Vector2D& v2)
@@ -212,6 +206,7 @@ namespace SimpleMath
 				x += coords.x;
 				y += coords.y;
 				z += coords.z;
+				computeParams();
 				return this;
 			}
 
@@ -221,6 +216,7 @@ namespace SimpleMath
 				x -= coords.x;
 				y -= coords.y;
 				z -= coords.z;
+				computeParams();
 				return this;
 			}
 
@@ -233,6 +229,7 @@ namespace SimpleMath
 				x = new_x;
 				y = new_y;
 				z = new_z;
+				computeParams();
 				return this;
 			}
 
@@ -291,6 +288,7 @@ namespace SimpleMath
 				x *= scaler;
 				y *= scaler;
 				z *= scaler;
+				computeParams();
 			}
 
 			void Vector3D::computeParams(bool first)
@@ -349,15 +347,6 @@ namespace SimpleMath
 				Coords3D c1 = v1.getCoords();
 				Coords3D c2 = v2.getCoords();
 				return c1.x * c2.x + c1.y * c2.y + c1.z * c2.z;
-			}
-
-			float Vector::angle_between(const Vector3D& v1, const Vector3D& v2, const char* mode)
-			{
-				assert(!v1.is_point() && !v2.is_point()); // Angle between dots is ambiguous
-				float angle = acos(dot(v1, v2) / (v1.m_Magnitude * v2.m_Magnitude));
-				if (mode == "deg")
-					return angle / M_PI * 180;
-				return angle;
 			}
 
 			bool Vector::is_collinear(const Vector3D& v1, const Vector3D& v2)

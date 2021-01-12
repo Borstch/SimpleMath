@@ -1,13 +1,7 @@
-#include <iostream>
 #include "gtest/gtest.h"
 
-namespace
-{
-	TEST(SampleTest, Simple)
-	{
-		EXPECT_EQ(1, 1);
-	}
-}
+#include "vector2d_tests.h"
+#include "vector3d_tests.h"
 
 int main()
 {

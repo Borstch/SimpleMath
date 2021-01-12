@@ -4,8 +4,7 @@ workspace "SimpleTest"
 
 	configurations
 	{
-		"Debug",
-		"Release"
+		"Test"
 	}
 
 -- Absolute paths to static libs include dirs
@@ -25,13 +24,15 @@ project "SimpleTest"
 
 	files
 	{
-		"%{prj.name}/**.h",
-		"%{prj.name}/**.cpp",
+		"%{prj.name}/*.h",
+		"%{prj.name}/*.cpp",
 	}
 
 	includedirs
 	{
-		"%{IncludeDir.googletest}"
+		"%{IncludeDir.googletest}",
+		"%{wks.location}/../src",
+		"%{wks.location}/../vendor/spdlog/include"
 	}
 
 	links
@@ -43,13 +44,9 @@ project "SimpleTest"
 	filter "system:windows"
 		systemversion "latest"
 
-	filter "configurations:Debug"
+	filter "configurations:Test"
 		runtime "Debug"
 		symbols "On"
-
-	filter "configurations:Release"
-		runtime "Release"
-		optimize "On"
 
 group "Dependencies"
 	include "../vendor/googletest/googletest"

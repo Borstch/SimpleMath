@@ -21,16 +21,30 @@ namespace SimpleMath
 
 }
 
-// Core log macros
-#define SM_CORE_TRACE(...)		::SimpleMath::Log::GetCoreLogger()->trace(__VA_ARGS__)
-#define SM_CORE_INFO(...)		::SimpleMath::Log::GetCoreLogger()->info(__VA_ARGS__)
-#define SM_CORE_WARN(...)		::SimpleMath::Log::GetCoreLogger()->warn(__VA_ARGS__)
-#define SM_CORE_ERROR(...)		::SimpleMath::Log::GetCoreLogger()->error(__VA_ARGS__)
-#define SM_CORE_CRITICAL(...)	::SimpleMath::Log::GetCoreLogger()->critical(__VA_ARGS__)
+#if defined(SMATH_DEBUG) || defined(SMATH_RELEASE)
+	// Core log macros
+	#define SM_CORE_TRACE(...)		::SimpleMath::Log::GetCoreLogger()->trace(__VA_ARGS__)
+	#define SM_CORE_INFO(...)		::SimpleMath::Log::GetCoreLogger()->info(__VA_ARGS__)
+	#define SM_CORE_WARN(...)		::SimpleMath::Log::GetCoreLogger()->warn(__VA_ARGS__)
+	#define SM_CORE_ERROR(...)		::SimpleMath::Log::GetCoreLogger()->error(__VA_ARGS__)
+	#define SM_CORE_CRITICAL(...)	::SimpleMath::Log::GetCoreLogger()->critical(__VA_ARGS__)
 
-// Client log macros
-#define SM_TRACE(...)			::SimpleMath::Log::GetClientLogger()->trace(__VA_ARGS__)
-#define SM_INFO(...)			::SimpleMath::Log::GetClientLogger()->info(__VA_ARGS__)
-#define SM_WARN(...)			::SimpleMath::Log::GetClientLogger()->warn(__VA_ARGS__)
-#define SM_ERROR(...)			::SimpleMath::Log::GetClientLogger()->error(__VA_ARGS__)
-#define SM_CRITICAL(...)		::SimpleMath::Log::GetClientLogger()->critical(__VA_ARGS__)
+	// Client log macros
+	#define SM_TRACE(...)			::SimpleMath::Log::GetClientLogger()->trace(__VA_ARGS__)
+	#define SM_INFO(...)			::SimpleMath::Log::GetClientLogger()->info(__VA_ARGS__)
+	#define SM_WARN(...)			::SimpleMath::Log::GetClientLogger()->warn(__VA_ARGS__)
+	#define SM_ERROR(...)			::SimpleMath::Log::GetClientLogger()->error(__VA_ARGS__)
+	#define SM_CRITICAL(...)		::SimpleMath::Log::GetClientLogger()->critical(__VA_ARGS__)
+#else
+	#define SM_CORE_TRACE(...)	
+	#define SM_CORE_INFO(...)	
+	#define SM_CORE_WARN(...)	
+	#define SM_CORE_ERROR(...)	
+	#define SM_CORE_CRITICAL(...)
+
+	#define SM_TRACE(...)		
+	#define SM_INFO(...)		
+	#define SM_WARN(...)		
+	#define SM_ERROR(...)		
+	#define SM_CRITICAL(...)	
+#endif

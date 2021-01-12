@@ -3,6 +3,7 @@ workspace "SimpleMath"
 
 	configurations
 	{
+		"Test",
 		"Debug",
 		"Release",
 		"Dist"
